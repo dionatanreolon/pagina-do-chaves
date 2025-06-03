@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bob Esponja lokão</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #00baff, #004e92);
+    color: #f0f0f0;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem;
+  }
+  #container {
+    background: rgba(0, 0, 0, 0.75);
+    max-width: 800px;
+    padding: 2rem 3rem;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.7);
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    color: #ffdf00;
+    text-shadow: 1px 1px 8px #444;
+  }
+  #story {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  #options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  button {
+    background: #ffdf00;
+    border: none;
+    border-radius: 8px;
+    color: #004e92;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background: #e6c700;
+  }
+  footer {
+    margin-top: 3rem;
+    font-size: 0.9rem;
+    color: #ccc;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+  <div id="container">
+    <h1>Bob Esponja lokão</h1>
+    <div id="story"></div>
+    <div id="options"></div>
+  </div>
+
+  <script>
+    const storyElement = document.getElementById('story');
+    const optionsElement = document.getElementById('options');
+
+   
+    const storyNodes = {
+      start: {
+        text: `Em um dia nublado no norte da Europa, Bob Esponja se viu diante da escolha mais importante de sua vida.
+Uma decisão que não só definiria seu destino, mas também o futuro do Siri Cascudo.
+Era um momento que poderia mudar tudo para sempre.`,
+        options: [
+          { text: 'Continuar no Siri Cascudo', nextNode: 'siri_cascudo' },
+          { text: 'Abandonar tudo e ir para a Vila do Chaves', nextNode: 'vila_do_chaves' }
+        ]
+      },
+      siri_cascudo: {
+        text: `Após o falecimento de seu Sirigueijo, Bob Esponja enfrentou uma tempestade de desafios.
+O Siri Cascudo, que antes prosperava, agora vivia sua pior fase.`,
+        options: [
+          { text: 'Contratar Plankton', nextNode: 'contratar_plankton' },
+          { text: 'Tentar fazer o hambúrguer do zero', nextNode: 'hamburguer_novo' }
+        ]
+      },
+      contratar_plankton: {
+        text: `Desesperado, Bob Esponja contratou Plankton, que finalmente roubou a receita secreta.
+Sem opções, fez um arriscado acordo com o inimigo para salvar o Siri Cascudo.`,
+        options: [
+          { text: 'Pedir ajuda a Sandy Bochechas', nextNode: 'ajuda_sandy' },
+          { text: 'Desistir', nextNode: 'fim_desiste' }
+        ]
+      },
+      ajuda_sandy: {
+        text: `Sandy Bochechas bolou um plano para recuperar a fórmula secreta.`,
+        options: [
+          { text: 'Usar a capa da invisibilidade e nocautear os guardas', nextNode: 'fim_bom' },
+          { text: 'Sandy é pega em armadilha e o plano falha', nextNode: 'fim_ruim' }
+        ]
+      },
+      fim_bom: {
+        text: `Sandy usa a capa da invisibilidade e nocauteia os guardas com seu karate.
+Eles prendem todos os capangas e o líder em bolhas de sabão e recuperam a fórmula secreta do hambúrguer de siri. Fim bom!`,
+        options: [
+          { text: 'Recomeçar', nextNode: 'start' }
+        ]
+      },
+      fim_ruim: {
+        text: `Sandy é pega em uma armadilha do líder, fica presa na base inimiga.
+O inimigo prende Bob Esponja e Plankton. Fim ruim.`,
+        options: [
+          { text: 'Recomeçar', nextNode: 'start' }
+        ]
+      },
+      fim_desiste: {
+        text: `Bob Esponja desiste e o Siri Cascudo fecha. Fim.`,
+        options: [
+          { text: 'Recomeçar', nextNode: 'start' }
+        ]
+      },
+      hamburguer_novo: {
+        text: `Bob Esponja tenta fazer o hambúrguer do zero, mas tudo dá errado.`,
+        options: [
+          { text: 'Desistir', nextNode: 'fim_desiste' },
+          { text: 'Tentar de novo', nextNode: 'hamburguer_cascudo' }
+        ]
+      },
+      hamburguer_cascudo: {
+        text: `Bob cria um lanche que todos apelidam de "Hambúrguer Cascudo".
+Ninguém gostou e as vendas caíram. O Siri Cascudo vai à falência.`,
+        options: [
+          { text: 'Recomeçar', nextNode: 'start' }
+        ]
+      },
+      vila_do_chaves: {
+        text: `Bob Esponja decidiu abandonar o Siri Cascudo e partiu para a Vila do Chaves.`,
+        options: [
+          { text: 'Investigar o barril do Chaves', nextNode: 'investiga_barril' },
+          { text: 'Se esconder', nextNode: 'fim_esconder' }
+        ]
+      },
+      investiga_barril: {
+        text: `Bob vê Nhonho e Chiquinha entrando no barril do Chaves. Curioso, ele tenta olhar dentro e...`,
+        options: [
+          { text: 'Cair dentro do barril para investigar', nextNode: 'cai_barril' },
+          { text: 'Sair correndo com medo', nextNode: 'fim_fugir' }
+        ]
+      },
+      cai_barril: {
+        text: `Dentro do barril, Bob vê Chiquinha e Nhonho abrindo um cofre com fantasias.
+Parece que eles têm segredos na vila!`,
+        options: [
+          { text: 'Ajudar na abertura do cofre', nextNode: 'fim_divertido' },
+          { text: 'Ignorar e sair', nextNode: 'fim_perdido' }
+        ]
+      },
+      fim_divertido: {
+        text: `Bob ajuda Chiquinha e Nhonho a abrir o cofre, e juntos descobrem segredos e se divertem na vila.
+Fim divertido!`,
+        options: [
+          { text: 'Recomeçar', nextNode: 'start' }
+        ]
+      },
+      fim_perdido: {
+        text: `Bob sai do barril e se perde na Vila do Chaves.
+Fim.`,
+        options: [
+          { text: 'Recomeçar', nextNode: 'start' }
+        ]
+      },
+      fim_esconder: {
+        text: `Bob se esconde e acaba perdendo a oportunidade de se integrar à vila.
+Fim.`,
+        options: [
+          { text: 'Recomeçar', nextNode: 'start' }
+        ]
+      },
+      fim_fugir: {
+        text: `Bob sai correndo com medo e não consegue retornar.
+Fim.`,
+        options: [
+          { text: 'Recomeçar', nextNode: 'start' }
+        ]
+      },
+    };
+
+    function showStoryNode(nodeKey) {
+      const node = storyNodes[nodeKey];
+      storyElement.textContent = node.text;
+      optionsElement.innerHTML = '';
+
+      node.options.forEach(option => {
+        const button = document.createElement('button');
+        button.textContent = option.text;
+        button.onclick = () => showStoryNode(option.nextNode);
+        optionsElement.appendChild(button);
+      });
+    }
+
+    // Inicia a história
+    showStoryNode('start');
+  </script>
+  <footer>Faça suas escolhas e descubra os diferentes finais!</footer>
+</body>
+</html>
+
